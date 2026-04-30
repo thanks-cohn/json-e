@@ -1,0 +1,311 @@
+{
+  "schema": {
+    "name": "glacial.image_sidecar",
+    "version": "0.1.0",
+    "record_type": "image_training_source"
+  },
+  "file": {
+    "file_name": "dog_park_qwerewrqerqwerqwerqewrqwreqwre001.png",
+    "relative_path": "images/dog_park_001.png",
+    "sidecar_name": "dog_park_001.glacial.json",
+    "media_type": "image/png",
+    "sha256": null,
+    "width": 1024,
+    "height": 1024,
+    "file_name_copy": "dog_park_qwerqwre001.png",
+    "file_name_copy_2": "dog_park_qwerqwre001.png",
+    "file_name_copy_3": "dog_park_qwerewrqerqwerqwerqewrqwreqwre001.png"
+  },
+  "top": {
+    "annotations": [
+      "sunny dog park",
+      "dogs playing on grass",
+      "trees and benches",
+      "outdoor pet scene"
+    ],
+    "text": "Several dogs play together on a grassy field at a sunny dog park with trees and benches.",
+    "tags": [
+      "dog park",
+      "dogs",
+      "pets",
+      "grass",
+      "sunny day",
+      "trees",
+      "benches",
+      "outdoors",
+      "playful"
+    ]
+  },
+  "scientific_record": {
+    "observer": "manual",
+    "annotation_method": "human_curated",
+    "label_confidence": 0.95,
+    "quality_score": 5,
+    "exclusion_flags": [],
+    "provenance": {
+      "source": "user_provided",
+      "license": "user_defined",
+      "consent": "not_applicable"
+    }
+  },
+  "training_runs": {
+    "kohya_lora_txt": {
+      "run_type": "lora_training_caption_export",
+      "trainer_family": "kohya_ss",
+      "model_family": "stable_diffusion",
+      "required_outputs": [
+        {
+          "path": "train/dog_park_001.png",
+          "type": "image_file"
+        },
+        {
+          "path": "train/dog_park_001.txt",
+          "type": "caption_file",
+          "format": "plain_text",
+          "content": "dog park, multiple dogs, pets playing, grass, sunny day, trees, benches, outdoor scene"
+        }
+      ],
+      "required_fields": [
+        "image_file",
+        "caption_file",
+        "caption_extension"
+      ],
+      "config": {
+        "caption_extension": ".txt",
+        "resolution": 1024,
+        "shuffle_caption": true,
+        "keep_tokens": 0
+      }
+    },
+    "huggingface_imagefolder_jsonl": {
+      "run_type": "dataset_metadata_export",
+      "trainer_family": "huggingface_datasets",
+      "model_family": "general_image_captioning",
+      "required_outputs": [
+        {
+          "path": "train/dog_park_001.png",
+          "type": "image_file"
+        },
+        {
+          "path": "train/metadata.jsonl",
+          "type": "dataset_metadata_file",
+          "format": "jsonl",
+          "record": {
+            "file_name": "dog_park_001.png",
+            "text": "Several dogs play together on a grassy field at a sunny dog park with trees and benches."
+          }
+        }
+      ],
+      "required_fields": [
+        "file_name",
+        "text"
+      ],
+      "config": {
+        "image_column": "image",
+        "caption_column": "text"
+      }
+    },
+    "huggingface_imagefolder_csv": {
+      "run_type": "dataset_metadata_export",
+      "trainer_family": "huggingface_datasets",
+      "model_family": "general_image_captioning",
+      "required_outputs": [
+        {
+          "path": "train/dog_park_001.png",
+          "type": "image_file"
+        },
+        {
+          "path": "train/metadata.csv",
+          "type": "dataset_metadata_file",
+          "format": "csv",
+          "columns": [
+            "file_name",
+            "text"
+          ],
+          "row": [
+            "dog_park_001.png",
+            "Several dogs play together on a grassy field at a sunny dog park with trees and benches."
+          ]
+        }
+      ],
+      "required_fields": [
+        "file_name",
+        "text"
+      ],
+      "config": {
+        "image_column": "image",
+        "caption_column": "text"
+      }
+    },
+    "dreambooth_lora_diffusers": {
+      "run_type": "concept_training",
+      "trainer_family": "diffusers",
+      "model_family": "dreambooth_lora",
+      "required_outputs": [
+        {
+          "path": "instance_images/dog_park_001.png",
+          "type": "instance_image"
+        }
+      ],
+      "required_fields": [
+        "instance_prompt",
+        "class_prompt",
+        "instance_data_dir"
+      ],
+      "prompts": {
+        "concept_token": "glacialdogpark",
+        "instance_prompt": "a photo of glacialdogpark",
+        "class_prompt": "a photo of a dog park",
+        "caption": "a photo of glacialdogpark, several dogs playing on grass at a sunny dog park"
+      },
+      "config": {
+        "instance_data_dir": "instance_images",
+        "class_data_dir": "class_images",
+        "prior_preservation": true,
+        "num_class_images": 100
+      }
+    },
+    "sdxl_lora_caption": {
+      "run_type": "lora_training_caption_export",
+      "trainer_family": "sdxl_lora",
+      "model_family": "sdxl",
+      "required_outputs": [
+        {
+          "path": "train/dog_park_001.png",
+          "type": "image_file"
+        },
+        {
+          "path": "train/dog_park_001.txt",
+          "type": "caption_file",
+          "format": "plain_text",
+          "content": "glacialdogpark, sunny dog park, multiple dogs playing, grass, trees, benches, outdoor pet scene, natural daylight"
+        }
+      ],
+      "required_fields": [
+        "image_file",
+        "caption_file",
+        "caption"
+      ],
+      "config": {
+        "resolution": 1024,
+        "train_text_encoder": true,
+        "caption_extension": ".txt"
+      }
+    },
+    "flux_lora_caption": {
+      "run_type": "lora_training_caption_export",
+      "trainer_family": "flux_lora",
+      "model_family": "flux",
+      "required_outputs": [
+        {
+          "path": "train/dog_park_001.png",
+          "type": "image_file"
+        },
+        {
+          "path": "train/dog_park_001.txt",
+          "type": "caption_file",
+          "format": "natural_language",
+          "content": "A sunny dog park scene with several dogs playing on grass near trees and benches."
+        }
+      ],
+      "required_fields": [
+        "image_file",
+        "caption_file",
+        "natural_language_caption"
+      ],
+      "config": {
+        "caption_style": "natural_language",
+        "trigger_token": null
+      }
+    },
+    "textual_inversion": {
+      "run_type": "token_embedding_training",
+      "trainer_family": "textual_inversion",
+      "model_family": "stable_diffusion",
+      "required_outputs": [
+        {
+          "path": "train/dog_park_001.png",
+          "type": "image_file"
+        }
+      ],
+      "required_fields": [
+        "placeholder_token",
+        "initializer_token",
+        "training_prompt"
+      ],
+      "prompts": {
+        "placeholder_token": "<glacialdogpark>",
+        "initializer_token": "park",
+        "training_prompt": "a photo of <glacialdogpark>, dogs playing on grass at a sunny park"
+      },
+      "config": {
+        "learnable_property": "object",
+        "caption_strategy": "template_prompt"
+      }
+    },
+    "wd14_tag_export": {
+      "run_type": "auto_tagging_export",
+      "trainer_family": "wd14_tagger",
+      "model_family": "tagging",
+      "required_outputs": [
+        {
+          "path": "train/dog_park_001.txt",
+          "type": "tag_file",
+          "format": "comma_separated_tags",
+          "content": "dog, multiple_dogs, grass, trees, park, outdoors, sunny, bench"
+        }
+      ],
+      "required_fields": [
+        "tag_caption",
+        "threshold"
+      ],
+      "config": {
+        "threshold": 0.35,
+        "replace_underscores": false,
+        "escape_tags": true
+      }
+    },
+    "coco_detection": {
+      "run_type": "object_detection_export",
+      "trainer_family": "coco",
+      "model_family": "object_detection",
+      "required_outputs": [
+        {
+          "path": "annotations.json",
+          "type": "coco_annotation_file",
+          "format": "coco_json"
+        }
+      ],
+      "required_fields": [
+        "images",
+        "annotations",
+        "categories"
+      ],
+      "record": {
+        "images": [
+          {
+            "id": 1,
+            "file_name": "dog_park_001.png",
+            "width": 1024,
+            "height": 1024
+          }
+        ],
+        "annotations": [],
+        "categories": [
+          {
+            "id": 1,
+            "name": "dog"
+          },
+          {
+            "id": 2,
+            "name": "bench"
+          },
+          {
+            "id": 3,
+            "name": "tree"
+          }
+        ]
+      }
+    }
+  }
+}
